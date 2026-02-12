@@ -18,21 +18,20 @@ body{
     font-family:'Jost', sans-serif;
 }
 
-/* Box centrale */
 .box{
     text-align:center;
     position:relative;
     z-index:10;
 }
 
-/* Busta grande */
+/* Busta gigante */
 #busta{
-    width:600px;
-    max-width:90%;
+    width:800px;
+    max-width:95%;
     transition:transform 0.8s ease;
 }
 
-/* Frasi sopra foto */
+/* Frasi sopra */
 .frase-top{
     font-size:40px;
     font-weight:700;
@@ -41,7 +40,7 @@ body{
 }
 
 .frase-sub{
-    font-size:18px;
+    font-size:14px;
     font-weight:700;
     color:#ffffff;
     margin-bottom:10px;
@@ -53,36 +52,49 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:10px;
+    gap:8px;
     margin-top:15px;
 }
 
 /* Foto */
 #foto{
-    width:240px;
+    width:230px;
     display:none;
 }
 
-/* Gatti vicini alla foto */
+/* Gatti vicini */
 .gif-gatto{
-    width:100px;
+    width:95px;
     display:none;
+}
+
+/* Frase appuntamento sotto foto */
+.appuntamento{
+    margin-top:10px;
+    display:none;
+    font-weight:700;
+}
+.appuntamento .titolo{
+    color:#ff0000;
+    font-size:18px;
+}
+.appuntamento .testo{
+    color:#ff0000;
+    font-size:22px;
 }
 
 /* Frase bianca in basso */
 .frase-bassa{
-    position:absolute;
-    bottom:15px;
-    right:20px;
-    font-size:20px;
+    margin-top:15px;
+    font-size:16px;
     font-weight:700;
     color:#ffffff;
     display:none;
 }
 
-/* Bottone microfono */
+/* Bottone */
 #microfono{
-    margin-top:25px;
+    margin-top:20px;
     padding:12px 25px;
     font-size:20px;
     font-weight:700;
@@ -106,10 +118,10 @@ body{
 
 /* Responsive */
 @media screen and (max-width:600px){
-    #busta{ width:90%; }
+    #busta{ width:95%; }
     .frase-top{ font-size:26px; }
-    #foto{ width:180px; }
-    .gif-gatto{ width:70px; }
+    #foto{ width:170px; }
+    .gif-gatto{ width:65px; }
 }
 </style>
 </head>
@@ -132,7 +144,12 @@ body{
         <img src="gif/gattoDestra.png" class="gif-gatto" id="gattoDX">
     </div>
 
-    <button id="microfono">cliccami 🎙️</button>
+    <div class="appuntamento" id="appuntamento">
+        <div class="titolo">Appuntamento:</div>
+        <div class="testo">sabato 14 alle 13:15 sotto casa tua 😏🚗</div>
+    </div>
+
+    <button id="microfono">apri 💌</button>
 
     <div class="frase-bassa" id="fraseBassa">
         Ti amo, il tuo pasticcins 🧁
@@ -150,6 +167,7 @@ const foto = document.getElementById("foto");
 const fraseTop = document.getElementById("fraseTop");
 const fraseSub = document.getElementById("fraseSub");
 const fraseBassa = document.getElementById("fraseBassa");
+const appuntamento = document.getElementById("appuntamento");
 const gattoSX = document.getElementById("gattoSX");
 const gattoDX = document.getElementById("gattoDX");
 const musica = document.getElementById("musica");
@@ -164,6 +182,7 @@ microfono.addEventListener("click", ()=>{
         foto.style.display="block";
         gattoSX.style.display="block";
         gattoDX.style.display="block";
+        appuntamento.style.display="block";
         fraseBassa.style.display="block";
         musica.play();
         startPioggia();
