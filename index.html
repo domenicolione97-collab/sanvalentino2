@@ -2,17 +2,17 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Ciao Lavetti scriccy scroccy...🍬</title>
+<title>Ciao Lavetti scriccy scroccy!!! ❤️</title>
 
-<!-- Font romantico da San Valentino -->
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<!-- Font romantici -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 body{
     margin:0;
     height:100vh;
     overflow:hidden;
-    background:linear-gradient(135deg,#ff4e50,#2ecc71);
+    background:linear-gradient(135deg,#ff5f6d,#ffc371,#ff9a9e);
     display:flex;
     justify-content:center;
     align-items:center;
@@ -23,7 +23,7 @@ body{
 /* Box centrale */
 .box{
     text-align:center;
-    background:rgba(0,0,0,0.3);
+    background:rgba(255,255,255,0.1);
     padding:40px;
     border-radius:20px;
     color:white;
@@ -34,27 +34,30 @@ body{
 /* Titolo grande e romantico */
 .titolo{
     font-size:64px;
-    font-family: 'Dancing Script', cursive;
-    color: #FF4500;
-    text-shadow: 2px 2px 8px #FFB6C1;
+    font-family: 'Great Vibes', cursive;
+    color: #FF1493;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
     margin-bottom:30px;
 }
 
-/* Foto del gattino */
+/* Foto del gattino più grande */
 .gattino{
-    width:180px;
+    width:280px;
+    max-width:80%;
     margin-bottom:20px;
 }
 
 /* Testo della frase */
 .testo{
-    font-size:24px;
+    font-size:26px;
     margin-bottom:30px;
+    font-family: 'Dancing Script', cursive;
+    color:#fff0f5;
 }
 
 /* Pulsanti */
 button{
-    padding:15px 30px;
+    padding:15px 35px;
     font-size:20px;
     border:none;
     border-radius:10px;
@@ -63,6 +66,18 @@ button{
     transition: all 0.3s ease;
     position: relative;
     z-index:11;
+}
+
+/* Pulsante Sì rosso con scritta bianca */
+#siBtn{
+    background-color:#ff2d2d;
+    color:white;
+}
+
+/* Pulsante No panna con scritta rossa */
+#noBtn{
+    background-color:#fff5e1;
+    color:#ff2d2d;
 }
 
 /* Pioggia */
@@ -85,7 +100,7 @@ button{
 <body>
 
 <div class="box">
-    <div class="titolo">Ciao Lavetti scriccy scroccy...🍬</div>
+    <div class="titolo">Ciao Lavetti scriccy scroccy!!!</div>
     <img src="foto/gattinoRosa.jpg" alt="Gattino con rosa" class="gattino">
     <div class="testo">Mi stavo chiedendo ecco.. se ti andasse di essere il mio Valentine? 👉🏼👈🏼</div>
     <button onclick="location.href='sorpresa.html'" id="siBtn">Sì</button>
@@ -93,15 +108,23 @@ button{
 </div>
 
 <script>
-// Sequenza dei messaggi per il pulsante No
+// Nuova sequenza dei messaggi per il pulsante No
 const messaggiNo = [
-    "Dai pensaci..",
-    "Non te ne pentirai giuro",
-    "Per favore te lo chiedo",
-    "Pensa ai nostri futuri figli",
+    "Dai pensaci...",
+    "Non te ne pentirai fidati",
+    "Per favore sono un uomo innamorato",
+    "E disperato",
+    "Pensa ai nostri figli",
     "Pensa alle coccole",
-    "Dai se vieni ti compro i sofficini",
-    "Se sei arrivata fino a qui non è vero amore, sappilo"
+    "Dai se clicchi \"si\" ti compro i sofficini",
+    "Kili di sofficini",
+    "Tonnellate di sofficini",
+    "GALASSIE DI SOFFICINI",
+    "Se sei arrivata fino a qui non è vero amore, sappilo",
+    "Non mi ami più, lo sapevo",
+    "Ultima chance",
+    "Ok, sei una bucchina",
+    "L'hai voluto tu!!!"
 ];
 
 const noBtn = document.getElementById("noBtn");
