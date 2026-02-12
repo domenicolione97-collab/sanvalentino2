@@ -20,49 +20,49 @@ body{
     position: relative;
 }
 
-/* Box centrale più piccolo */
+/* Box centrale */
 .box{
     text-align:center;
     background:rgba(255,255,255,0.1);
-    padding:35px;
+    padding:25px;
     border-radius:20px;
     color:white;
     position:relative;
     z-index:10;
-    max-width:80%;
+    max-width:90%;
 }
 
-/* Titolo grande con sfumatura rosso → nero */
+/* Titolo con sfumatura rosso → nero */
 .titolo{
-    font-size:72px;
+    font-size:64px;
     font-weight:700;
     background: linear-gradient(to bottom, #ff0000, #000000);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-    margin-bottom:30px;
+    margin-bottom:20px;
 }
 
 /* Foto del gattino */
 .gattino{
     width:330px;
-    max-width:90%;
-    margin-bottom:25px;
+    max-width:80%;
+    margin-bottom:20px;
 }
 
 /* Testo della frase sotto la foto, in grassetto e colore acceso */
 .testo{
-    font-size:28px;
+    font-size:26px;
     font-weight:700;
-    margin-bottom:35px;
+    margin-bottom:30px;
     color:#ff3366;
 }
 
 /* Pulsanti */
 button{
-    padding:15px 40px;
-    font-size:22px;
-    font-weight:700; /* grassetto */
+    padding:12px 30px;
+    font-size:20px;
+    font-weight:700;
     border:none;
     border-radius:10px;
     cursor:pointer;
@@ -72,17 +72,16 @@ button{
     z-index:11;
 }
 
-/* Pulsante Sì rosso con scritta bianca */
+/* Pulsante Sì rosso */
 #siBtn{
     background-color:#ff2d2d;
     color:white;
 }
 
-/* Pulsante No panna con scritta rossa */
+/* Pulsante No panna */
 #noBtn{
     background-color:#fff5e1;
     color:#ff2d2d;
-    font-weight:700; /* grassetto */
 }
 
 /* Pioggia di immagini */
@@ -94,6 +93,23 @@ button{
     height:100%;
     pointer-events:none;
     z-index:1;
+}
+
+/* Media Query per smartphone */
+@media screen and (max-width: 600px){
+    .titolo{
+        font-size:36px;
+    }
+    .gattino{
+        width:200px;
+    }
+    .testo{
+        font-size:20px;
+    }
+    button{
+        padding:10px 20px;
+        font-size:18px;
+    }
 }
 </style>
 </head>
@@ -113,7 +129,7 @@ button{
 const noBtn = document.getElementById("noBtn");
 const siBtn = document.getElementById("siBtn");
 
-// Sequenza dei messaggi del pulsante No
+// Sequenza messaggi pulsante No
 const messaggiNo = [
     "Dai pensaci...",
     "Non te ne pentirai fidati",
@@ -133,14 +149,15 @@ const messaggiNo = [
 ];
 
 let indiceNo = 0;
+
+// Clic su No
 noBtn.addEventListener("click", () => {
     if(indiceNo < messaggiNo.length){
-        // Cambia testo del pulsante No
         noBtn.textContent = messaggiNo[indiceNo];
-        noBtn.style.fontWeight = "700"; // grassetto
+        noBtn.style.fontWeight = "700";
         indiceNo++;
 
-        // Ingrosso il pulsante Sì con scritta interna
+        // Ingrosso pulsante Sì e scritta
         let currentWidth = parseInt(window.getComputedStyle(siBtn).width);
         let currentHeight = parseInt(window.getComputedStyle(siBtn).height);
         let currentFont = parseInt(window.getComputedStyle(siBtn).fontSize);
@@ -152,7 +169,12 @@ noBtn.addEventListener("click", () => {
     }
 });
 
-// Pioggia di immagini grandi
+// Clic su Sì apre pagina sorpresa
+siBtn.addEventListener("click", () => {
+    window.location.href = "sorpresa.html";
+});
+
+// Pioggia immagini grandi
 const immaginiPioggia = ["foto/rosa.png","foto/gattinoPiccolo.png"];
 function creaPioggia(){
     const pioggiaContainer = document.querySelector(".pioggia");
@@ -162,7 +184,7 @@ function creaPioggia(){
     img.style.position = "absolute";
     img.style.top = "-200px";
     img.style.left = Math.random()*window.innerWidth + "px";
-    img.style.width = (120 + Math.random()*80) + "px"; // tra 120px e 200px
+    img.style.width = (120 + Math.random()*80) + "px"; // 120-200px
     img.style.pointerEvents = "none";
     pioggiaContainer.appendChild(img);
 
