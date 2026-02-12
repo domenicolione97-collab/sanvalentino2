@@ -43,24 +43,26 @@ body{
     margin-bottom:30px;
 }
 
-/* Foto del gattino più grande */
+/* Foto del gattino */
 .gattino{
-    width:450px;
+    width:330px;
     max-width:90%;
     margin-bottom:25px;
 }
 
-/* Testo della frase sotto la foto */
+/* Testo della frase sotto la foto, in grassetto e colore acceso */
 .testo{
     font-size:28px;
+    font-weight:700;
     margin-bottom:35px;
-    color:#ff3366; /* più acceso */
+    color:#ff3366;
 }
 
 /* Pulsanti */
 button{
     padding:15px 40px;
     font-size:22px;
+    font-weight:700; /* grassetto */
     border:none;
     border-radius:10px;
     cursor:pointer;
@@ -80,6 +82,7 @@ button{
 #noBtn{
     background-color:#fff5e1;
     color:#ff2d2d;
+    font-weight:700; /* grassetto */
 }
 
 /* Pioggia di immagini */
@@ -104,7 +107,6 @@ button{
     <button id="noBtn">No</button>
 </div>
 
-<!-- Contenitore per la pioggia di rose e gattini -->
 <div class="pioggia"></div>
 
 <script>
@@ -133,14 +135,18 @@ const messaggiNo = [
 let indiceNo = 0;
 noBtn.addEventListener("click", () => {
     if(indiceNo < messaggiNo.length){
+        // Cambia testo del pulsante No
         noBtn.textContent = messaggiNo[indiceNo];
+        noBtn.style.fontWeight = "700"; // grassetto
         indiceNo++;
 
-        // Il pulsante Sì diventa più grande
+        // Ingrosso il pulsante Sì con scritta interna
         let currentWidth = parseInt(window.getComputedStyle(siBtn).width);
         let currentHeight = parseInt(window.getComputedStyle(siBtn).height);
+        let currentFont = parseInt(window.getComputedStyle(siBtn).fontSize);
         siBtn.style.width = (currentWidth + 10) + "px";
         siBtn.style.height = (currentHeight + 5) + "px";
+        siBtn.style.fontSize = (currentFont + 2) + "px";
     } else {
         noBtn.style.display="none";
     }
@@ -154,13 +160,13 @@ function creaPioggia(){
     const scelta = immaginiPioggia[Math.floor(Math.random()*immaginiPioggia.length)];
     img.src = scelta;
     img.style.position = "absolute";
-    img.style.top = "-150px";
+    img.style.top = "-200px";
     img.style.left = Math.random()*window.innerWidth + "px";
     img.style.width = (120 + Math.random()*80) + "px"; // tra 120px e 200px
     img.style.pointerEvents = "none";
     pioggiaContainer.appendChild(img);
 
-    let top = -150;
+    let top = -200;
     let velocita = 2 + Math.random()*3;
 
     function anim(){
