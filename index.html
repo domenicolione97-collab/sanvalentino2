@@ -20,15 +20,16 @@ body{
     position: relative;
 }
 
-/* Box centrale */
+/* Box centrale più piccolo */
 .box{
     text-align:center;
     background:rgba(255,255,255,0.1);
-    padding:50px;
+    padding:35px;
     border-radius:20px;
     color:white;
     position:relative;
     z-index:10;
+    max-width:80%;
 }
 
 /* Titolo grande con sfumatura rosso → nero */
@@ -44,7 +45,7 @@ body{
 
 /* Foto del gattino più grande */
 .gattino{
-    width:400px; /* più grande */
+    width:450px;
     max-width:90%;
     margin-bottom:25px;
 }
@@ -53,7 +54,7 @@ body{
 .testo{
     font-size:28px;
     margin-bottom:35px;
-    color:#ff6f91; /* colore acceso ma delicato */
+    color:#ff3366; /* più acceso */
 }
 
 /* Pulsanti */
@@ -99,7 +100,7 @@ button{
     <div class="titolo">Ciao Lavetti scriccy scroccy!!!</div>
     <img src="foto/gattinoRosa.jpg" alt="Gattino con rosa" class="gattino">
     <div class="testo">Mi stavo chiedendo ecco.. se ti andasse di essere il mio Valentine? 👉🏼👈🏼</div>
-    <button onclick="location.href='sorpresa.html'" id="siBtn">Sì</button>
+    <button id="siBtn">Sì</button>
     <button id="noBtn">No</button>
 </div>
 
@@ -134,12 +135,18 @@ noBtn.addEventListener("click", () => {
     if(indiceNo < messaggiNo.length){
         noBtn.textContent = messaggiNo[indiceNo];
         indiceNo++;
+
+        // Il pulsante Sì diventa più grande
+        let currentWidth = parseInt(window.getComputedStyle(siBtn).width);
+        let currentHeight = parseInt(window.getComputedStyle(siBtn).height);
+        siBtn.style.width = (currentWidth + 10) + "px";
+        siBtn.style.height = (currentHeight + 5) + "px";
     } else {
         noBtn.style.display="none";
     }
 });
 
-// Pioggia di immagini
+// Pioggia di immagini grandi
 const immaginiPioggia = ["foto/rosa.png","foto/gattinoPiccolo.png"];
 function creaPioggia(){
     const pioggiaContainer = document.querySelector(".pioggia");
@@ -147,14 +154,13 @@ function creaPioggia(){
     const scelta = immaginiPioggia[Math.floor(Math.random()*immaginiPioggia.length)];
     img.src = scelta;
     img.style.position = "absolute";
-    img.style.top = "-50px";
+    img.style.top = "-150px";
     img.style.left = Math.random()*window.innerWidth + "px";
-    img.style.width = (40 + Math.random()*60) + "px"; // dimensione media
+    img.style.width = (120 + Math.random()*80) + "px"; // tra 120px e 200px
     img.style.pointerEvents = "none";
     pioggiaContainer.appendChild(img);
 
-    let top = -50;
-    let left = parseFloat(img.style.left);
+    let top = -150;
     let velocita = 2 + Math.random()*3;
 
     function anim(){
@@ -168,7 +174,7 @@ function creaPioggia(){
     }
     anim();
 }
-setInterval(creaPioggia, 400);
+setInterval(creaPioggia, 500);
 </script>
 </body>
 </html>
