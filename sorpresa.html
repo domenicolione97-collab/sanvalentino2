@@ -25,29 +25,51 @@ body{
     z-index:10;
 }
 
-/* Busta iniziale */
+/* Busta grande */
 #busta{
-    width:260px;
+    width:600px;
+    max-width:90%;
     transition:transform 0.8s ease;
 }
 
-/* Foto nascosta */
-#foto{
-    width:300px;
-    margin-top:20px;
-    display:none;
-}
-
-/* Frase sotto foto */
-.frase-principale{
-    font-size:32px;
+/* Frasi sopra foto */
+.frase-top{
+    font-size:40px;
     font-weight:700;
     color:#ff0000;
-    margin-top:15px;
     display:none;
 }
 
-/* Frase bianca */
+.frase-sub{
+    font-size:18px;
+    font-weight:700;
+    color:#ffffff;
+    margin-bottom:10px;
+    display:none;
+}
+
+/* Contenitore foto + gatti */
+.contenitore{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-top:15px;
+}
+
+/* Foto */
+#foto{
+    width:240px;
+    display:none;
+}
+
+/* Gatti vicini alla foto */
+.gif-gatto{
+    width:100px;
+    display:none;
+}
+
+/* Frase bianca in basso */
 .frase-bassa{
     position:absolute;
     bottom:15px;
@@ -71,17 +93,6 @@ body{
     cursor:pointer;
 }
 
-/* Gatti laterali */
-.gif-gatto{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    width:120px;
-    display:none;
-}
-#gatto-sx{ left:10px; }
-#gatto-dx{ right:10px; }
-
 /* Pioggia */
 .pioggia{
     position:absolute;
@@ -93,11 +104,12 @@ body{
     z-index:1;
 }
 
-/* Responsive telefono */
+/* Responsive */
 @media screen and (max-width:600px){
-    #foto{ width:220px; }
-    .frase-principale{ font-size:22px; }
-    .gif-gatto{ width:80px; }
+    #busta{ width:90%; }
+    .frase-top{ font-size:26px; }
+    #foto{ width:180px; }
+    .gif-gatto{ width:70px; }
 }
 </style>
 </head>
@@ -107,10 +119,17 @@ body{
 <div class="box">
     <img src="foto/busta.png" id="busta">
 
-    <img src="foto/vostraFoto.jpg" id="foto">
+    <div class="frase-top" id="fraseTop">
+        🎉DAJEEEEE, HA DETTO SIIIIIIIIII 🎉
+    </div>
+    <div class="frase-sub" id="fraseSub">
+        sono contento della tua scelta spontanea
+    </div>
 
-    <div class="frase-principale" id="frase">
-        Tieniti pronta questo sabato alle 13:15 allora!!! ❤️
+    <div class="contenitore">
+        <img src="gif/gattoSinistra.png" class="gif-gatto" id="gattoSX">
+        <img src="foto/vostraFoto.jpg" id="foto">
+        <img src="gif/gattoDestra.png" class="gif-gatto" id="gattoDX">
     </div>
 
     <button id="microfono">cliccami 🎙️</button>
@@ -120,24 +139,19 @@ body{
     </div>
 </div>
 
-<!-- Gatti -->
-<img src="gif/gattoSinistra.png" id="gatto-sx" class="gif-gatto">
-<img src="gif/gattoDestra.png" id="gatto-dx" class="gif-gatto">
-
-<!-- Pioggia -->
 <div class="pioggia"></div>
 
-<!-- Musica -->
 <audio id="musica" src="musica/canzone.mp3"></audio>
 
 <script>
 const microfono = document.getElementById("microfono");
 const busta = document.getElementById("busta");
 const foto = document.getElementById("foto");
-const frase = document.getElementById("frase");
+const fraseTop = document.getElementById("fraseTop");
+const fraseSub = document.getElementById("fraseSub");
 const fraseBassa = document.getElementById("fraseBassa");
-const gattoSX = document.getElementById("gatto-sx");
-const gattoDX = document.getElementById("gatto-dx");
+const gattoSX = document.getElementById("gattoSX");
+const gattoDX = document.getElementById("gattoDX");
 const musica = document.getElementById("musica");
 
 microfono.addEventListener("click", ()=>{
@@ -145,11 +159,12 @@ microfono.addEventListener("click", ()=>{
 
     setTimeout(()=>{
         busta.style.display="none";
+        fraseTop.style.display="block";
+        fraseSub.style.display="block";
         foto.style.display="block";
-        frase.style.display="block";
-        fraseBassa.style.display="block";
         gattoSX.style.display="block";
         gattoDX.style.display="block";
+        fraseBassa.style.display="block";
         musica.play();
         startPioggia();
     },700);
@@ -157,7 +172,6 @@ microfono.addEventListener("click", ()=>{
 
 function startPioggia(){
     const immagini = ["foto/micio1.png","foto/micio2.png"];
-
     setInterval(()=>{
         const img = document.createElement("img");
         img.src = immagini[Math.floor(Math.random()*immagini.length)];
