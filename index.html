@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <title>Ciao Lavetti scriccy scroccy!!! ❤️</title>
 
-<!-- Font romantici -->
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+<!-- Font Jost -->
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 body{
@@ -16,7 +16,7 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:'Jost', sans-serif;
     position: relative;
 }
 
@@ -24,41 +24,42 @@ body{
 .box{
     text-align:center;
     background:rgba(255,255,255,0.1);
-    padding:40px;
+    padding:50px;
     border-radius:20px;
     color:white;
     position:relative;
     z-index:10;
 }
 
-/* Titolo grande e romantico */
+/* Titolo grande con sfumatura rosso → nero */
 .titolo{
-    font-size:64px;
-    font-family: 'Great Vibes', cursive;
-    color: #FF1493;
+    font-size:72px;
+    font-weight:700;
+    background: linear-gradient(to bottom, #ff0000, #000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
     margin-bottom:30px;
 }
 
 /* Foto del gattino più grande */
 .gattino{
-    width:280px;
-    max-width:80%;
-    margin-bottom:20px;
+    width:400px; /* più grande */
+    max-width:90%;
+    margin-bottom:25px;
 }
 
-/* Testo della frase */
+/* Testo della frase sotto la foto */
 .testo{
-    font-size:26px;
-    margin-bottom:30px;
-    font-family: 'Dancing Script', cursive;
-    color:#fff0f5;
+    font-size:28px;
+    margin-bottom:35px;
+    color:#ff6f91; /* colore acceso ma delicato */
 }
 
 /* Pulsanti */
 button{
-    padding:15px 35px;
-    font-size:20px;
+    padding:15px 40px;
+    font-size:22px;
     border:none;
     border-radius:10px;
     cursor:pointer;
@@ -80,25 +81,20 @@ button{
     color:#ff2d2d;
 }
 
-/* Pioggia */
+/* Pioggia di immagini */
 .pioggia{
     position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
     pointer-events:none;
-    top:-100px;
-    animation-name:pioggia;
-    animation-timing-function:linear;
-    animation-iteration-count:infinite;
     z-index:1;
-}
-
-@keyframes pioggia {
-    0% { transform: translateY(-100px) rotate(0deg);}
-    100% { transform: translateY(110vh) rotate(360deg);}
 }
 </style>
 </head>
-<body>
 
+<body>
 <div class="box">
     <div class="titolo">Ciao Lavetti scriccy scroccy!!!</div>
     <img src="foto/gattinoRosa.jpg" alt="Gattino con rosa" class="gattino">
@@ -107,8 +103,14 @@ button{
     <button id="noBtn">No</button>
 </div>
 
+<!-- Contenitore per la pioggia di rose e gattini -->
+<div class="pioggia"></div>
+
 <script>
-// Nuova sequenza dei messaggi per il pulsante No
+const noBtn = document.getElementById("noBtn");
+const siBtn = document.getElementById("siBtn");
+
+// Sequenza dei messaggi del pulsante No
 const messaggiNo = [
     "Dai pensaci...",
     "Non te ne pentirai fidati",
@@ -116,7 +118,7 @@ const messaggiNo = [
     "E disperato",
     "Pensa ai nostri figli",
     "Pensa alle coccole",
-    "Dai se clicchi \"si\" ti compro i sofficini",
+    'Dai se clicchi "si" ti compro i sofficini',
     "Kili di sofficini",
     "Tonnellate di sofficini",
     "GALASSIE DI SOFFICINI",
@@ -127,36 +129,46 @@ const messaggiNo = [
     "L'hai voluto tu!!!"
 ];
 
-const noBtn = document.getElementById("noBtn");
-const siBtn = document.getElementById("siBtn");
-let counter = 0;
-
+let indiceNo = 0;
 noBtn.addEventListener("click", () => {
-    if(counter < messaggiNo.length){
-        noBtn.innerText = messaggiNo[counter];
-        siBtn.style.transform = `scale(${1 + 0.1*counter})`;
-        counter++;
+    if(indiceNo < messaggiNo.length){
+        noBtn.textContent = messaggiNo[indiceNo];
+        indiceNo++;
     } else {
-        noBtn.style.display = "none";
-        siBtn.style.transform = "scale(2)";
+        noBtn.style.display="none";
     }
 });
 
-// Pioggia di gattini e rose (dimensione media)
-const immaginiPioggia = ["foto/rosa.png","foto/gattinoPiccolo.png"]; 
-
+// Pioggia di immagini
+const immaginiPioggia = ["foto/rosa.png","foto/gattinoPiccolo.png"];
 function creaPioggia(){
+    const pioggiaContainer = document.querySelector(".pioggia");
     const img = document.createElement("img");
-    img.src = immaginiPioggia[Math.floor(Math.random()*immaginiPioggia.length)];
-    img.className = "pioggia";
-    img.style.left = Math.random()*100 + "vw";
-    img.style.width = (40 + Math.random()*40) + "px"; // 40px-80px
-    document.body.appendChild(img);
-    img.addEventListener("animationend", ()=> img.remove());
+    const scelta = immaginiPioggia[Math.floor(Math.random()*immaginiPioggia.length)];
+    img.src = scelta;
+    img.style.position = "absolute";
+    img.style.top = "-50px";
+    img.style.left = Math.random()*window.innerWidth + "px";
+    img.style.width = (40 + Math.random()*60) + "px"; // dimensione media
+    img.style.pointerEvents = "none";
+    pioggiaContainer.appendChild(img);
+
+    let top = -50;
+    let left = parseFloat(img.style.left);
+    let velocita = 2 + Math.random()*3;
+
+    function anim(){
+        top += velocita;
+        img.style.top = top+"px";
+        if(top > window.innerHeight){
+            img.remove();
+        } else{
+            requestAnimationFrame(anim);
+        }
+    }
+    anim();
 }
-
-setInterval(creaPioggia, 300);
+setInterval(creaPioggia, 400);
 </script>
-
 </body>
 </html>
