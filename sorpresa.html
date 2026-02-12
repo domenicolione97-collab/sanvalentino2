@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>La sorpresa! 🧁</title>
 
-<!-- Font Jost -->
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
@@ -17,175 +16,168 @@ body{
     justify-content:center;
     align-items:center;
     font-family:'Jost', sans-serif;
-    position: relative;
 }
 
 /* Box centrale */
 .box{
     text-align:center;
-    background:rgba(255,255,255,0.1);
-    padding:30px;
-    border-radius:20px;
-    color:white;
     position:relative;
     z-index:10;
-    max-width:90%;
 }
 
-/* Foto centrale leggermente più piccola */
-.foto{
+/* Busta iniziale */
+#busta{
+    width:260px;
+    transition:transform 0.8s ease;
+}
+
+/* Foto nascosta */
+#foto{
     width:300px;
-    max-width:80%;
-    margin:20px 0;
+    margin-top:20px;
+    display:none;
 }
 
-/* Frase principale sotto la foto */
+/* Frase sotto foto */
 .frase-principale{
-    font-family:'Jost', sans-serif;
     font-size:32px;
     font-weight:700;
     color:#ff0000;
-    margin-bottom:20px;
+    margin-top:15px;
+    display:none;
 }
 
-/* Frase secondaria in basso a destra */
+/* Frase bianca */
 .frase-bassa{
     position:absolute;
     bottom:15px;
     right:20px;
     font-size:20px;
     font-weight:700;
-    color:#ff69b4;
+    color:#ffffff;
+    display:none;
 }
 
 /* Bottone microfono */
 #microfono{
+    margin-top:25px;
     padding:12px 25px;
     font-size:20px;
     font-weight:700;
     border:none;
     border-radius:50px;
-    background-color:#ff2d2d;
+    background:#ff2d2d;
     color:white;
     cursor:pointer;
-    margin-top:15px;
-    z-index:11;
-    position:relative;
-    transition: all 0.3s ease;
 }
 
-/* Pioggia di orsetti gommosi */
+/* Gatti laterali */
+.gif-gatto{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:120px;
+    display:none;
+}
+#gatto-sx{ left:10px; }
+#gatto-dx{ right:10px; }
+
+/* Pioggia */
 .pioggia{
     position:absolute;
-    top:0;
-    left:0;
     width:100%;
     height:100%;
+    top:0;
+    left:0;
     pointer-events:none;
     z-index:1;
 }
 
-/* GIF dei gatti cantanti (inizialmente nascoste) */
-.gif-gatto{
-    position:absolute;
-    width:120px;
-    top:50%;
-    transform:translateY(-50%);
-    display:none;
-}
-
-#gatto-sinistra{
-    left:10px;
-}
-
-#gatto-destra{
-    right:10px;
-}
-
-/* Responsive per smartphone */
+/* Responsive telefono */
 @media screen and (max-width:600px){
-    .foto{
-        width:200px;
-    }
-    .frase-principale{
-        font-size:24px;
-    }
-    .frase-bassa{
-        font-size:16px;
-    }
-    .gif-gatto{
-        width:80px;
-    }
-    #microfono{
-        font-size:16px;
-        padding:10px 20px;
-    }
+    #foto{ width:220px; }
+    .frase-principale{ font-size:22px; }
+    .gif-gatto{ width:80px; }
 }
 </style>
 </head>
 
 <body>
+
 <div class="box">
-    <img src="foto/vostraFoto.jpg" alt="Noi due" class="foto">
-    <div class="frase-principale">Tieniti pronta questo sabato alle 13:15 allora!!! ❤️</div>
+    <img src="foto/busta.png" id="busta">
+
+    <img src="foto/vostraFoto.jpg" id="foto">
+
+    <div class="frase-principale" id="frase">
+        Tieniti pronta questo sabato alle 13:15 allora!!! ❤️
+    </div>
+
     <button id="microfono">cliccami 🎙️</button>
-    <div class="frase-bassa">Ti amo, il tuo pasticcins 🧁</div>
+
+    <div class="frase-bassa" id="fraseBassa">
+        Ti amo, il tuo pasticcins 🧁
+    </div>
 </div>
 
-<!-- GIF gatti cantanti -->
-<img src="gif/gattoSinistra.gif" id="gatto-sinistra" class="gif-gatto">
-<img src="gif/gattoDestra.gif" id="gatto-destra" class="gif-gatto">
+<!-- Gatti -->
+<img src="gif/gattoSinistra.png" id="gatto-sx" class="gif-gatto">
+<img src="gif/gattoDestra.png" id="gatto-dx" class="gif-gatto">
 
-<!-- Pioggia orsetti -->
+<!-- Pioggia -->
 <div class="pioggia"></div>
 
 <!-- Musica -->
 <audio id="musica" src="musica/canzone.mp3"></audio>
 
 <script>
-// Bottone microfono
 const microfono = document.getElementById("microfono");
+const busta = document.getElementById("busta");
+const foto = document.getElementById("foto");
+const frase = document.getElementById("frase");
+const fraseBassa = document.getElementById("fraseBassa");
+const gattoSX = document.getElementById("gatto-sx");
+const gattoDX = document.getElementById("gatto-dx");
 const musica = document.getElementById("musica");
-const gattoSin = document.getElementById("gatto-sinistra");
-const gattoDes = document.getElementById("gatto-destra");
 
 microfono.addEventListener("click", ()=>{
-    // Fa partire la musica
-    musica.play();
-    // Mostra le gif dei gatti
-    gattoSin.style.display = "block";
-    gattoDes.style.display = "block";
+    busta.style.transform = "rotateX(90deg)";
+
+    setTimeout(()=>{
+        busta.style.display="none";
+        foto.style.display="block";
+        frase.style.display="block";
+        fraseBassa.style.display="block";
+        gattoSX.style.display="block";
+        gattoDX.style.display="block";
+        musica.play();
+        startPioggia();
+    },700);
 });
 
-// Pioggia di orsetti gommosi grandi
-const immaginiPioggia = ["foto/orsetto1.png","foto/orsetto2.png"];
-function creaPioggia(){
-    const pioggiaContainer = document.querySelector(".pioggia");
-    const img = document.createElement("img");
-    const scelta = immaginiPioggia[Math.floor(Math.random()*immaginiPioggia.length)];
-    img.src = scelta;
-    img.style.position = "absolute";
-    img.style.top = "-200px";
-    img.style.left = Math.random()*window.innerWidth + "px";
-    img.style.width = (120 + Math.random()*80) + "px"; // 120-200px
-    img.style.pointerEvents = "none";
-    pioggiaContainer.appendChild(img);
+function startPioggia(){
+    const immagini = ["foto/micio1.png","foto/micio2.png"];
 
-    let top = -200;
-    let velocita = 2 + Math.random()*3;
+    setInterval(()=>{
+        const img = document.createElement("img");
+        img.src = immagini[Math.floor(Math.random()*immagini.length)];
+        img.style.position="absolute";
+        img.style.top="-200px";
+        img.style.left=Math.random()*window.innerWidth+"px";
+        img.style.width=(120+Math.random()*80)+"px";
+        document.querySelector(".pioggia").appendChild(img);
 
-    function anim(){
-        top += velocita;
-        img.style.top = top+"px";
-        if(top > window.innerHeight){
-            img.remove();
-        } else{
-            requestAnimationFrame(anim);
+        let top=-200;
+        function anim(){
+            top+=3;
+            img.style.top=top+"px";
+            if(top<window.innerHeight) requestAnimationFrame(anim);
+            else img.remove();
         }
-    }
-    anim();
+        anim();
+    },500);
 }
-setInterval(creaPioggia, 500);
 </script>
+
 </body>
 </html>
