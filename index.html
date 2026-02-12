@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Ciao Lavetti scriccy scroccy!!! ❤️</title>
+<title>Ciao Lavetti scriccy scroccy...🍬</title>
 
 <!-- Font romantico da San Valentino -->
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
@@ -35,14 +35,14 @@ body{
 .titolo{
     font-size:64px;
     font-family: 'Dancing Script', cursive;
-    color: #FF4500; /* colore caldo arancione-rosso */
+    color: #FF4500;
     text-shadow: 2px 2px 8px #FFB6C1;
     margin-bottom:30px;
 }
 
 /* Foto del gattino */
 .gattino{
-    width:150px;
+    width:180px;
     margin-bottom:20px;
 }
 
@@ -52,4 +52,88 @@ body{
     margin-bottom:30px;
 }
 
-/* Puls
+/* Pulsanti */
+button{
+    padding:15px 30px;
+    font-size:20px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    margin:10px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index:11;
+}
+
+/* Pioggia */
+.pioggia{
+    position:absolute;
+    pointer-events:none;
+    top:-100px;
+    animation-name:pioggia;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+    z-index:1;
+}
+
+@keyframes pioggia {
+    0% { transform: translateY(-100px) rotate(0deg);}
+    100% { transform: translateY(110vh) rotate(360deg);}
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+    <div class="titolo">Ciao Lavetti scriccy scroccy...🍬</div>
+    <img src="foto/gattinoRosa.jpg" alt="Gattino con rosa" class="gattino">
+    <div class="testo">Mi stavo chiedendo ecco.. se ti andasse di essere il mio Valentine? 👉🏼👈🏼</div>
+    <button onclick="location.href='sorpresa.html'" id="siBtn">Sì</button>
+    <button id="noBtn">No</button>
+</div>
+
+<script>
+// Sequenza dei messaggi per il pulsante No
+const messaggiNo = [
+    "Dai pensaci..",
+    "Non te ne pentirai giuro",
+    "Per favore te lo chiedo",
+    "Pensa ai nostri futuri figli",
+    "Pensa alle coccole",
+    "Dai se vieni ti compro i sofficini",
+    "Se sei arrivata fino a qui non è vero amore, sappilo"
+];
+
+const noBtn = document.getElementById("noBtn");
+const siBtn = document.getElementById("siBtn");
+let counter = 0;
+
+noBtn.addEventListener("click", () => {
+    if(counter < messaggiNo.length){
+        noBtn.innerText = messaggiNo[counter];
+        siBtn.style.transform = `scale(${1 + 0.1*counter})`;
+        counter++;
+    } else {
+        noBtn.style.display = "none";
+        siBtn.style.transform = "scale(2)";
+    }
+});
+
+// Pioggia di gattini e rose (dimensione media)
+const immaginiPioggia = ["foto/rosa.png","foto/gattinoPiccolo.png"]; 
+
+function creaPioggia(){
+    const img = document.createElement("img");
+    img.src = immaginiPioggia[Math.floor(Math.random()*immaginiPioggia.length)];
+    img.className = "pioggia";
+    img.style.left = Math.random()*100 + "vw";
+    img.style.width = (40 + Math.random()*40) + "px"; // 40px-80px
+    document.body.appendChild(img);
+    img.addEventListener("animationend", ()=> img.remove());
+}
+
+setInterval(creaPioggia, 300);
+</script>
+
+</body>
+</html>
