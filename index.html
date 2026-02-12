@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Ciao Lavetti scriccy scroccy 🍬</title>
+<style>
+body{
+    margin:0;
+    height:100vh;
+    background:linear-gradient(135deg,#ff4e50,#2ecc71); /* rosso e verde */
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial, Helvetica, sans-serif;
+    position: relative;
+}
+.box{
+    text-align:center;
+    background:rgba(0,0,0,0.3);
+    padding:40px;
+    border-radius:20px;
+    color:white;
+    position:relative;
+    z-index:10;
+}
+.titolo{
+    font-size:36px;
+    margin-bottom:20px;
+}
+.gattino{
+    width:150px;
+    margin-bottom:20px;
+}
+.testo{
+    font-size:22px;
+    margin-bottom:30px;
+}
+button{
+    padding:15px 30px;
+    font-size:20px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    margin:10px;
+    position: relative;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+    <div class="titolo">Ciao Lavetti scriccy scroccy 🍬</div>
+    <img src="foto/gattinoRosa.jpg" alt="Gattino con rosa" class="gattino">
+    <div class="testo">Mi stavo chiedendo ecco.. se ti andasse di essere il mio Valentine..? 👉🏼👈🏼</div>
+    <button onclick="location.href='sorpresa.html'">Sì</button>
+    <button id="noBtn">No</button>
+</div>
+
+<script>
+// Pulsante "No" che scappa
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", ()=>{
+    const maxX = window.innerWidth - noBtn.offsetWidth;
+    const maxY = window.innerHeight - noBtn.offsetHeight;
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+    noBtn.style.position = "absolute";
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+});
+</script>
+
+</body>
+</html>
